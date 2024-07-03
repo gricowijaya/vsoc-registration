@@ -15,17 +15,23 @@ def main():
         token = wazuh_manager.auth(WAZUH_USERNAME, WAZUH_PASSWORD)
         if token == None:
             return "Authentication failed"
-
         print(token)
-        health = wazuh_manager.checkhealth(token)
 
+        agents = wazuh_manager.list_agent(token)
+        if agents == None:
+            return "No agents found"
+        print(agents)
+
+        health = wazuh_manager.checkhealth(token)
+        if health == None:
+            return "No health information found"
         print(health)
+
         return health
     except Exception as e:
         print(e)
         return e
     
-
 
 if __name__ == "__main__":
     main()

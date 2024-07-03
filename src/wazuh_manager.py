@@ -52,6 +52,40 @@ def checkhealth(token):
         return e
 
 
+def list_agent(token):
+    try: 
+        url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents?pretty=true"
+        headers = {
+            "Authorization": f"Bearer {token}"
+        }
+
+        response = requests.get(url, headers=headers, verify=False)
+        
+        if response.status_code == 200:
+            response_data = response.json()
+            if response_data.get("error") == 0:
+                return response_data
+            else:
+                raise Exception(f"API returned an error: {response_data.get('error')}")
+        else:
+            raise Exception(f"Request failed with status code: {response.status_code}")
+    except HTTPError as http_err:
+        print (f'HTTP error occurred: {http_err}')
+        return f'HTTP error occurred: {http_err}'
+    except ConnectionError as conn_err:
+        print (f'Connection error occurred: {conn_err}')
+        return f'Connection error occurred: {conn_err}'
+    except Timeout as time_err:
+        print (f'Timeout error occurred: {time_err}')
+        return f'Timeout error occurred: {time_err}'
+    except RequestException as req_err:
+        print (f'Request error occurred: {req_err}')
+        return f'Request error occurred: {req_err}'
+    except Exception as e:
+        print(e)
+        return e
+
+
 def get_agent_key(agent_name, token):
     try: 
         url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents?pretty=true"
