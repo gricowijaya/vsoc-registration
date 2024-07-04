@@ -57,19 +57,34 @@ def get_summary_agents_status(token: str):
 
 @exception_handler
 @beautify_json
-def get_agent_key(agent_name: str, token: str):
-    url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents?pretty=true"
+def set_register_agent(agent_name: str, agent_ip: str, token: str):
+    path = "/agents"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {token}"
     }
 
-    payload = {
-        "name": agent_name
+    if not agent_ip:
+        payload = {
+            "name": agent_name
+        }
+    else: 
+        payload = {
+            "name": agent_name,
+            "ip": agent_ip
+        }
+
+    response = get_response("POST", path, headers, body=json.dumps(payload))
+    return response
+
+@exception_handler
+@beautify_json
+def get_agent_key(agent_id: str, token: str):
+    path = f"/agents/{agent_id}/key"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {token}"
     }
 
-    response = get_response("POST", url, headers, body=json.dumps(payload))
-    agent_id = response["data"]["id"]
-    agent_key = response["data"]["key"]
-
-    return agent_id, agent_key
+    agent_key = get_response("GET", path, headers)["data"]["key"]
+    return agent_key
