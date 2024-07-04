@@ -9,6 +9,8 @@ load_dotenv()
 
 WAZUH_USERNAME=os.getenv("WAZUH_USERNAME")
 WAZUH_PASSWORD=os.getenv("WAZUH_PASSWORD")
+SOCKET_IP=os.getenv("SOCKET_IP")
+SOCKET_PORT=os.getenv("SOCKET_PORT")
 
 
 def main():
@@ -44,10 +46,18 @@ def main():
             print("No agents status found")
             exit(1)
 
-        print("Processing Summary of Agents Key ...")
-        agents_status = get_agent_key(token)
+        new_agent = get_agent_ip_hostname(SOCKET_IP, SOCKET_PORT)
+
+        print("Registering your server to Wazuh Manager ...")
+        agents_status = set_register_agent(new_agent["hostname"], new_agent["ip"], token)
         if agents_status == None:
             print("No agents status found")
+            exit(1)
+
+        print("Fetching your server agents Key ...")
+        agents_key = get_agent_key(new_agent["hostname"], new_agent["ip"], token)
+        if agents_key == None:
+            print("No agents key found")
             exit(1)
 
     except Exception as e:
