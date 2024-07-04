@@ -44,6 +44,12 @@ def main():
             print("No agents status found")
             exit(1)
 
+        print("Processing Summary of Agents Key ...")
+        agents_status = get_agent_key(token)
+        if agents_status == None:
+            print("No agents status found")
+            exit(1)
+
     except Exception as e:
         print(e)
         exit(1)
