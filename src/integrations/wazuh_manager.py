@@ -34,7 +34,7 @@ def auth(username, password):
 @beautify_json
 def checkhealth(token):
     url = (f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}")
-    headers = { "Authorization": f"Bearer {token}"}
+    headers = { "Authorization": f"Bearer {token}" }
     response = get_response("GET", url, headers)
     return response
 
@@ -43,9 +43,7 @@ def checkhealth(token):
 @beautify_json
 def list_agent(token):
     url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents?pretty=true"
-    headers = {
-        "Authorization": f"Bearer {token}"
-    }
+    headers = { "Authorization": f"Bearer {token}" }
     response = get_response("GET", url, headers)
     return response
 
