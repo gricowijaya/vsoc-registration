@@ -50,6 +50,23 @@ def list_agent(token):
 
 @exception_handler
 @beautify_json
+def summary_agents_os(token):
+    url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents/summary/os?pretty=true"
+    headers = { "Authorization": f"Bearer {token}" }
+    response = get_response("GET", url, headers)
+    return response
+
+
+@exception_handler
+@beautify_json
+def summary_agents_status(token):
+    url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents/summary/status?pretty=true"
+    headers = { "Authorization": f"Bearer {token}" }
+    response = get_response("GET", url, headers)
+    return response
+
+@exception_handler
+@beautify_json
 def get_agent_key(agent_name, token):
     url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents?pretty=true"
     headers = {
