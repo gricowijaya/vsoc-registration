@@ -1,6 +1,8 @@
+#!/usr/bin/env python3
 import os
-from src import auth, checkhealth, list_agent
+from src import *
 from dotenv import load_dotenv
+
 
 load_dotenv()
 
@@ -29,6 +31,13 @@ def main():
         if agents == None:
             print("No agents found")
             exit(1)
+
+        print("Processing Summary of Agents Status ...")
+        agents_os = summary_agents_os(token)
+        if agents_os == None:
+            print("No agents os found")
+            exit(1)
+        
 
     except Exception as e:
         print(e)
