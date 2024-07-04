@@ -50,3 +50,4 @@ make main
 - [Wazuh Agent Deployment in Windows](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-windows.html)
 - [Wazuh Secure Agent Identity Verification with SSL](https://documentation.wazuh.com/current/user-manual/agent/agent-enrollment/security-options/agent-identity-verification.html)
 - [Wazuh agent enrollment using password](https://documentation.wazuh.com/current/user-manual/agent/agent-enrollment/security-options/using-password-authentication.html)
+- [Using Wazuh API in python](https://documentation.wazuh.com/current/user-manual/api/getting-started.html#python)
