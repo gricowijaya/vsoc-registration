@@ -32,7 +32,7 @@ def auth(username, password):
 
 @exception_handler
 @beautify_json
-def checkhealth(token):
+def get_checkhealth(token):
     url = (f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}")
     headers = { "Authorization": f"Bearer {token}" }
     response = get_response("GET", url, headers)
@@ -41,7 +41,7 @@ def checkhealth(token):
 
 @exception_handler
 @beautify_json
-def list_agent(token):
+def get_list_agent(token):
     url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents?pretty=true"
     headers = { "Authorization": f"Bearer {token}" }
     response = get_response("GET", url, headers)
@@ -50,7 +50,7 @@ def list_agent(token):
 
 @exception_handler
 @beautify_json
-def summary_agents_os(token):
+def get_summary_agents_os(token):
     url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents/summary/os?pretty=true"
     headers = { "Authorization": f"Bearer {token}" }
     response = get_response("GET", url, headers)
@@ -59,7 +59,7 @@ def summary_agents_os(token):
 
 @exception_handler
 @beautify_json
-def summary_agents_status(token):
+def get_summary_agents_status(token):
     url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents/summary/status?pretty=true"
     headers = { "Authorization": f"Bearer {token}" }
     response = get_response("GET", url, headers)

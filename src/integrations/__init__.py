@@ -1,13 +1,13 @@
 from .wazuh_manager import (auth, 
-							checkhealth, 
-							list_agent, 
-							summary_agents_os, 
-							summary_agents_status, 
+							get_checkhealth, 
+							get_list_agent, 
+							get_summary_agents_os, 
+							get_summary_agents_status, 
 							get_agent_key)
 
 __all__ = ['auth', 
-		   'checkhealth', 
-		   'list_agent', 
-		   'summary_agents_os',
-		   'summary_agents_status',
+		   'get_checkhealth', 
+		   'get_list_agent', 
+		   'get_summary_agents_os',
+		   'get_summary_agents_status',
 		   'get_agent_key']
