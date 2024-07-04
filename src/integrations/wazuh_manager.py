@@ -2,7 +2,6 @@ import os
 import json
 import urllib3
 from base64 import b64encode
-from requests.exceptions import HTTPError, ConnectionError, Timeout, RequestException
 from dotenv import load_dotenv
 from ..utils import get_response, exception_handler, beautify_json
 
@@ -18,7 +17,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 @exception_handler
 @beautify_json
-def auth(username, password):
+def auth(username: str, password: str):
     path = "/security/user/authenticate"
     url = (f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}{path}")
     basic_auth = f"{username}:{password}".encode()
@@ -32,7 +31,7 @@ def auth(username, password):
 
 @exception_handler
 @beautify_json
-def get_checkhealth(token):
+def get_checkhealth(token: str):
     url = (f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}")
     headers = { "Authorization": f"Bearer {token}" }
     response = get_response("GET", url, headers)
@@ -41,7 +40,7 @@ def get_checkhealth(token):
 
 @exception_handler
 @beautify_json
-def get_list_agent(token):
+def get_list_agent(token: str):
     url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents?pretty=true"
     headers = { "Authorization": f"Bearer {token}" }
     response = get_response("GET", url, headers)
@@ -50,7 +49,7 @@ def get_list_agent(token):
 
 @exception_handler
 @beautify_json
-def get_summary_agents_os(token):
+def get_summary_agents_os(token: str):
     url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents/summary/os?pretty=true"
     headers = { "Authorization": f"Bearer {token}" }
     response = get_response("GET", url, headers)
@@ -59,7 +58,7 @@ def get_summary_agents_os(token):
 
 @exception_handler
 @beautify_json
-def get_summary_agents_status(token):
+def get_summary_agents_status(token: str):
     url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents/summary/status?pretty=true"
     headers = { "Authorization": f"Bearer {token}" }
     response = get_response("GET", url, headers)
@@ -67,7 +66,7 @@ def get_summary_agents_status(token):
 
 @exception_handler
 @beautify_json
-def get_agent_key(agent_name, token):
+def get_agent_key(agent_name: str, token: str):
     url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents?pretty=true"
     headers = {
         "Content-Type": "application/json",
