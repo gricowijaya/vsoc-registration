@@ -1,5 +1,5 @@
 import os
-from src import wazuh_manager
+from src import auth, checkhealth, list_agent
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -11,26 +11,31 @@ WAZUH_PASSWORD=os.getenv("WAZUH_PASSWORD")
 
 def main():
     try: 
-        print("processing the authentication ...")
-        token = wazuh_manager.auth(WAZUH_USERNAME, WAZUH_PASSWORD)
-        if token == None:
-            return "Authentication failed"
+        print("Processing authentication ...")
+        token = auth(WAZUH_USERNAME, WAZUH_PASSWORD)
+        if not token:
+            print("Authentication failed")
+            exit(1)
+        print("Successfully Authenticated")
         print(token)
 
-        agents = wazuh_manager.list_agent(token)
+        print("Processing List of Agents ...")
+        health = checkhealth(token)
+        if not health:
+            print("No health information found") 
+            exit(1)
+        print("Wazuh Manager Health:", health)
+
+        print("Processing List of Wazuh Agents ...")
+        agents = list_agent(token)
         if agents == None:
-            return "No agents found"
-        print(agents)
+            print("No agents found")
+            exit(1)
+        print("Successfully got list of Wazuh Agents: ", agents)
 
-        health = wazuh_manager.checkhealth(token)
-        if health == None:
-            return "No health information found"
-        print(health)
-
-        return health
     except Exception as e:
         print(e)
-        return e
+        exit(1)
     
 
 if __name__ == "__main__":
