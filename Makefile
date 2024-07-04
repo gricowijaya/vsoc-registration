@@ -4,10 +4,28 @@ venv:
 	@test -d venv || virtualenv venv
 
 freeze: 
-	venv/bin/pip freeze > requirements.txt
+	@if [ -z "$$VIRTUAL_ENV" ]; then \
+		echo "Please activate the virtualenv first"; \
+		echo "by running command: source venv/bin/activate"; \
+		exit 1; \
+	else \
+		venv/bin/pip freeze > requirements.txt; \
+	fi
 
 install:
-	venv/bin/pip install -r requirements.txt
+	@if [ -z "$$VIRTUAL_ENV" ]; then \
+		echo "Please activate the virtualenv first"; \
+		echo "by running command: source venv/bin/activate"; \
+		exit 1; \
+	else \
+		venv/bin/pip install -r requirements.txt; \
+	fi
 
 main:
-	./venv/bin/python main.py
+	@if [ -z "$$VIRTUAL_ENV" ]; then \
+		echo "Please activate the virtualenv first"; \
+		echo "by running command: source venv/bin/activate"; \
+		exit 1; \
+	else \
+		./venv/bin/python main.py; \
+	fi
