@@ -4,7 +4,7 @@ import urllib3
 from base64 import b64encode
 from requests.exceptions import HTTPError, ConnectionError, Timeout, RequestException
 from dotenv import load_dotenv
-from ..utils import get_response, exception_handler
+from ..utils import get_response, exception_handler, beautify_json
 
 load_dotenv()
 
@@ -17,6 +17,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 @exception_handler
+@beautify_json
 def auth(username, password):
     path = "/security/user/authenticate"
     url = (f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}{path}")
@@ -30,6 +31,7 @@ def auth(username, password):
 
 
 @exception_handler
+@beautify_json
 def checkhealth(token):
     url = (f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}")
     headers = { "Authorization": f"Bearer {token}"}
@@ -38,6 +40,7 @@ def checkhealth(token):
 
 
 @exception_handler
+@beautify_json
 def list_agent(token):
     url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents?pretty=true"
     headers = {
@@ -48,6 +51,7 @@ def list_agent(token):
 
 
 @exception_handler
+@beautify_json
 def get_agent_key(agent_name, token):
     url = f"{WAZUH_MANAGER_URL}:{WAZUH_MANAGER_PORT}/agents?pretty=true"
     headers = {

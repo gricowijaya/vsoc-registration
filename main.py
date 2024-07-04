@@ -17,21 +17,18 @@ def main():
             print("Authentication failed")
             exit(1)
         print("Successfully Authenticated")
-        print(token)
 
         print("Processing List of Agents ...")
         health = checkhealth(token)
         if not health:
             print("No health information found") 
             exit(1)
-        print("Wazuh Manager Health:", health)
 
         print("Processing List of Wazuh Agents ...")
         agents = list_agent(token)
         if agents == None:
             print("No agents found")
             exit(1)
-        print("Successfully got list of Wazuh Agents: ", agents)
 
     except Exception as e:
         print(e)
