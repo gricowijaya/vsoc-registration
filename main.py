@@ -21,19 +21,19 @@ def main():
         print("Successfully Authenticated")
 
         print("Processing List of Agents ...")
-        health = checkhealth(token)
+        health = get_checkhealth(token)
         if not health:
             print("No health information found") 
             exit(1)
 
         print("Processing List of Wazuh Agents ...")
-        agents = list_agent(token)
+        agents = get_list_agent(token)
         if agents == None:
             print("No agents found")
             exit(1)
 
-        print("Processing Summary of Agents Status ...")
-        agents_os = summary_agents_os(token)
+        print("Processing Summary of Agents OS ...")
+        agents_os = get_summary_agents_os(token)
         if agents_os == None:
             print("No agents os found")
             exit(1)
