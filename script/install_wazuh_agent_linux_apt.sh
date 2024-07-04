@@ -8,35 +8,42 @@ if [ ! -f /etc/debian_version ]; then
 fi
 
 curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg;
+if [ $? -ne 0 ]; then
+    echo "Failed to import Wazuh GPG key."
+    exit 1
+fi
+
 echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list;
+if [ $? -ne 0 ]; then
+    echo "Failed to add Wazuh repository."
+    exit 1
+fi
+
 wait 
 sudo apt-get update;
+if [ $? -ne 0 ]; then
+    echo "Failed to update package list."
+    exit 1
+fi
 sudo apt-get install wazuh-agent -y;
+if [ $? -ne 0 ]; then
+    echo "Failed to install Wazuh agent."
+    exit 1
+fi
 
 echo "Wazuh agent installation completed."
 
 
 sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+if [ $? -ne 0 ]; then
+    echo "Failed to comment out Wazuh repository."
+    exit 1
+fi
+
 sudo apt-get update
+if [ $? -ne 0 ]; then
+    echo "Failed to update package list. for disable  wazuh agent"
+    exit 1
+fi
 
 echo "Package wazuh agent update disabled."
-
-# Dependencies for compiling Python
-sudo apt-get install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev wget libbz2-dev pkg-config
-
-cd /tmp
-wget https://www.python.org/ftp/python/3.12.0/Python-3.12.0.tar.xz
-wait
-tar -xf Python-3.12.0.tar.xz
-cd Python-3.12.0
-./configure --enable-optimizations
-make -j $(nproc)
-sudo make altinstall
-
-sudo ln -sf /usr/local/bin/python3.12 /usr/local/bin/python
-
-wait
-
-sudo python3.12 -m pip install virtualenv
-
-echo "Python 3.12 and virtualenv installation completed."
