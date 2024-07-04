@@ -11,15 +11,9 @@ def get_response(request_method, url, headers, verify=False, body=None):
 		body = {}
 
 	# for logging body, must deleted soon
-	print("13: get_response.py, body:", body)
-
 	request_result = getattr(requests, request_method.lower())(url, headers=headers, verify=verify, data=body)
 	
-	print("18: get_response.py, request_result:", request_result)
-
-	print("20: get_response.py, json.loads(request_result.content.decode()):", json.loads(request_result.content.decode()))
-
 	if request_result.status_code == 200:
 		return json.loads(request_result.content.decode())
 	else:
-		raise Exception(f"Request failed with status code: {request_result.status_code}")
+		raise Exception(f"Request failed with status code: {request_result.status_code}, message: {request_result.content.decode()}")
