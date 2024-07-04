@@ -38,6 +38,11 @@ def main():
             print("No agents os found")
             exit(1)
         
+        print("Processing Summary of Agents Status ...")
+        agents_status = get_summary_agents_status(token)
+        if agents_status == None:
+            print("No agents status found")
+            exit(1)
 
     except Exception as e:
         print(e)
