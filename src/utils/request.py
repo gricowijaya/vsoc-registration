@@ -6,7 +6,7 @@ from .exception import exception_handler
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 @exception_handler
-def get_response(request_method, url, headers, verify=False, body=None):
+def get_response(request_method: str, url: str, headers: object, verify=False, body=None):
 	if body is None:
 		body = {}
 
