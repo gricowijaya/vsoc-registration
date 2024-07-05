@@ -46,9 +46,6 @@ def main():
             print("No agents status found")
             exit(1)
 
-        print(f'49, {__name__} The Socket ip is {SOCKET_IP} with type of {type(SOCKET_IP)}')
-        print(f'50, {__name__} The Socket port is {SOCKET_PORT} with type of {type(SOCKET_PORT)}')
-
         new_agent = get_agent_ip_hostname(SOCKET_IP, SOCKET_PORT)
 
         print("Registering your server to Wazuh Manager ...")
