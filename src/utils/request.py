@@ -24,7 +24,7 @@ def get_response(request_method: str, path: str, headers: object, verify=False, 
 	
 	if request_result.status_code == 200:
 		return json.loads(request_result.content.decode())
-	elif request_result.status_code != 201:
+	elif request_result.status_code != 200:
 		return json.loads(request_result.content.decode())
 	else:
 		raise Exception(f"Request failed with status code: {request_result.status_code}, message: {request_result.content.decode()}")

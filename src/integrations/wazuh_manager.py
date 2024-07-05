@@ -86,5 +86,5 @@ def get_agent_key(agent_id: str, token: str):
         "Authorization": f"Bearer {token}"
     }
 
-    agent_key = get_response("GET", path, headers)["data"]["key"]
+    agent_key = get_response("GET", path, headers)
     return agent_key
