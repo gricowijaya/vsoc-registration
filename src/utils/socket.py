@@ -4,7 +4,7 @@ from .output import beautify_json
 
 @exception_handler
 @beautify_json
-def get_agent_ip_hostname(manager_ip: int, manager_port: int):
+def get_agent_ip_hostname(manager_ip: str, manager_port: str):
 	try:
 		name = socket.gethostname()
 		print(name)
