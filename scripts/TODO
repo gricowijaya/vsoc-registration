@@ -1,8 +1,9 @@
 [] script install agent in Linux (Yum)
 [] script install agent in Linux (ZYpp)
 [] script install agent in Linux (APK)
-[] script install agent in Windows
+[TESTING] script install agent in Windows
 [] script install agent in Mac
 [] script install python in Windows
 [] script install python in Mac
+[] Create Argument Scripts
 [DONE] script to link python
