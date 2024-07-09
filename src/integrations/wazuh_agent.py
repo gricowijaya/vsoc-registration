@@ -2,7 +2,7 @@ import subprocess
 import urllib3
 import xml.etree.cElementTree as ET
 from xml.dom import minidom
-from ..utils import exception_handler, get_prefix_config
+from ..utils import exception_handler, beautify_json, get_prefix_config, get_response
 
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -60,3 +60,16 @@ def set_agent_key(agent_key: str):
         raise Exception("Error in registering agent with key, msg: ", process.stderr)
 
     return process.returncode
+
+@exception_handler
+@beautify_json
+def set_agent_to_group(token: str, agent_id: str, group_id: str):
+    path = f"/agents/{agent_id}/groups/{group_id}"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {token}"
+    }
+
+    agent_groups = get_response("PUT", path, headers)
+    return agent_groups
+

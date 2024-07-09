@@ -8,6 +8,7 @@ from .wazuh_manager import (auth,
 							get_agent_key)
 
 from .wazuh_agent import (set_config,
+                          set_agent_to_group, 
                           set_agent_key) 
 
 __all__ = ['auth', 
@@ -19,4 +20,5 @@ __all__ = ['auth',
 		   'get_agent_key'
 		   'get_groups_list'
 		   'set_config'
+		   'set_agent_to_group'
 		   'set_agent_key']

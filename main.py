@@ -72,6 +72,11 @@ def main():
         if groups_list == None:
             raise Exception("No agent is registered")
 
+
+        assign_agent_to_group = set_agent_to_group(token, agent_registration["data"]["id"], groups_list["data"]["affected_items"][0]["name"])
+        if assign_agent_to_group == None:
+            raise Exception("No agent is assigned to group")
+
     except Exception as e:
         print(e)
         exit(1)
