@@ -46,27 +46,27 @@ def main():
             print("No agents status found")
             exit(1)
 
-        new_agent = get_agent_ip_hostname(SOCKET_IP, SOCKET_PORT)
+        # new_agent = get_agent_ip_hostname(SOCKET_IP, SOCKET_PORT)
 
-        print("Registering your server to Wazuh Manager ...")
-        agent_registration = set_register_agent(new_agent["hostname"], new_agent["ip"], token)
-        if agent_registration == None:
-           print("No agents status found")
-           exit(1)
+        # print("Registering your server to Wazuh Manager ...")
+        # agent_registration = set_register_agent(new_agent["hostname"], new_agent["ip"], token)
+        # if agent_registration == None:
+        #    print("No agents status found")
+        #    exit(1)
 
-        print("Fetching your server agents Key ...")
-        agents_key = get_agent_key(agent_registration["data"]["id"], token)
-        if agents_key == None:
-            print("No agents key found")
-            exit(1)
+        # print("Fetching your server agents Key ...")
+        # agents_key = get_agent_key(agent_registration["data"]["id"], token)
+        # if agents_key == None:
+        #     print("No agents key found")
+        #     exit(1)
 
-        config = set_config(agent_registration["data"]["ip"], SOCKET_IP, SOCKET_PORT)
-        if config == None:
-            raise Exception("No config File returned")
+        # config = set_config(agent_registration["data"]["ip"], SOCKET_IP, SOCKET_PORT)
+        # if config == None:
+        #     raise Exception("No config File returned")
 
-        register_agent = set_agent_key(agents_key["data"]["affected_items"][0]["key"])
-        if register_agent == None:
-            raise Exception("No agent is registered")
+        # register_agent = set_agent_key(agents_key["data"]["affected_items"][0]["key"])
+        # if register_agent == None:
+        #     raise Exception("No agent is registered")
         
         groups_list = get_groups_list(token)
         if groups_list == None:
