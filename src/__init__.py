@@ -5,6 +5,7 @@ from .integrations import (auth,
 						   get_summary_agents_status,
 						   set_register_agent,
 						   get_agent_key, 
+						   get_groups_list, 
                            set_agent_key,
                            set_config)
 
@@ -18,5 +19,6 @@ __all__ = ['auth',
 		   'set_register_agent',
 		   'get_agent_ip_hostname',
 		   'get_agent_key',
+		   'get_groups_list',
 		   'set_agent_key',
 		   'set_config']

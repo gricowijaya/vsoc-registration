@@ -88,3 +88,13 @@ def get_agent_key(agent_id: str, token: str):
 
     agent_key = get_response("GET", path, headers)
     return agent_key
+
+def get_groups_list(token: str):
+    path = "/groups"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {token}"
+    }
+
+    groups = get_response("GET", path, headers)
+    return groups

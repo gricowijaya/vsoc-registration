@@ -67,6 +67,10 @@ def main():
         register_agent = set_agent_key(agents_key["data"]["affected_items"][0]["key"])
         if register_agent == None:
             raise Exception("No agent is registered")
+        
+        groups_list = get_groups_list(token)
+        if groups_list == None:
+            raise Exception("No agent is registered")
 
     except Exception as e:
         print(e)
