@@ -89,6 +89,8 @@ def get_agent_key(agent_id: str, token: str):
     agent_key = get_response("GET", path, headers)
     return agent_key
 
+@exception_handler
+@beautify_json
 def get_groups_list(token: str):
     path = "/groups"
     headers = {
