@@ -64,7 +64,7 @@ def set_agent_key(agent_key: str):
 @exception_handler
 @beautify_json
 def set_agent_to_group(token: str, agent_id: str, group_id: str):
-    path = f"/agents/{agent_id}/groups/{group_id}"
+    path = f"/agents/{agent_id}/group/{group_id}"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {token}"
